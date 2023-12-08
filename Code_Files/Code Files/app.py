@@ -104,7 +104,7 @@ def hello_world():
             cosine_mat = cosinesimmat(cvmat)
 
             recdf = recommend_course(df, titlename,
-                                     cosine_mat, num_rec)
+                                    cosine_mat, num_rec)
 
             course_url, course_title, course_price = extractfeatures(recdf)
 

@@ -61,9 +61,9 @@ def extractfeatures(recdf):
     return course_url, course_title, course_price        
             
 
-##----------------------------------------------------------------
 @app.route('/', methods=['GET','POST'])
 def hello_world():
+    
     if request.method == 'POST':
         my_dict= request.form
         titlename= my_dict['course']
@@ -103,9 +103,13 @@ def hello_world():
                         
                 else:
                     course_url, course_title, course_price= extractfeatures(resultdf)
+                    coursemap = dict(zip(course_title, course_url))
+                    if len(coursemap)!=0:
+                        return render_template('index.html', coursemap=coursemap, coursename=course_title, showtitle=True)
+                    else:
+                        return render_template('index.html', showerror=True, coursename= titlename)
+    return render_template('index.html')
                             
-                        
-
-
+                    
 if __name__ == '__main__':
     app.run(debug=True)
